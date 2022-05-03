@@ -3,6 +3,7 @@ mongoose.connect(process.env.MONGODB_URI, { useCreateIndex: true, useNewUrlParse
 mongoose.Promise = global.Promise
 
 module.exports = {
-    Todo: require('./models/todo.model'),
-    Done: require('./models/done.model')
+    horses: require('./models/horse.model'),
+    races: require('./models/race.model'),
+    results: require('./models/result.model'),
 }
