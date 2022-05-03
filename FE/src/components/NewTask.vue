@@ -2,6 +2,7 @@
   <div class="bg-white shadow rounded px-3 pt-3 pb-5 border border-white">
     <div class="row">
       <div class="col">
+        <p>Add a new race</p>
         <label for="author" class="block text-sm font-medium text-gray-700"
           >Author</label
         >
@@ -13,6 +14,7 @@
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col">
         <label for="title" class="block text-sm font-medium text-gray-700"

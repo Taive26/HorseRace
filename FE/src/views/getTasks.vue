@@ -3,27 +3,11 @@
     <div class="flex justify-center">
       <div class="min-h-screen flex overflow-x-scroll py-12">
         <div class="bg-gray-100 rounded-lg px-3 py-3 column-double-width rounded mr-4">
-          <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">
-            Pick another author
-          </p>
           <div class="row">
-            <select class="form-control" @click="changeAuthor($event)">
-              <option v-for="author in authors" :value="author" :key="author">{{ author }}</option>
-            </select>
+           <img src="https://us.123rf.com/450wm/scusi/scusi1803/scusi180300041/98289180-jockeys-with-race-horses-on-the-racetrack.jpg?ver=6" alt="">
           </div>
-          <div class="text-center">
-            <button class="bg-green-400 px-4 py-2 rounded mb-3" @click="backToEnterName">
-              Add author
-            </button>
-            <button class="bg-green-400 px-4 py-2 rounded mb-3" type="submit" @click="getTasksByAuthor">
-              Switch author
-            </button>
-          </div>
-          <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">
-            Add new todo
-          </p>
+          <add-horse class="my-3" />
           <new-task class="my-3" @task-added="getTasksByAuthor" />
-          <download-file />
         </div>
       </div>
 
@@ -60,6 +44,7 @@
 import draggable from 'vuedraggable';
 import TaskCard from '../components/TaskCard';
 import NewTask from '../components/NewTask';
+import AddHorse from '../components/AddHorse';
 import axios from 'axios';
 
 export default {
@@ -68,6 +53,7 @@ export default {
     TaskCard,
     draggable,
     NewTask,
+    AddHorse,
   },
 
   data() {
