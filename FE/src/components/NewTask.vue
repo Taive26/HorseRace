@@ -4,30 +4,17 @@
       <div class="col">
         <p>Add a new race</p>
         <label for="author" class="block text-sm font-medium text-gray-700"
-          >Author</label
+          >Place</label
         >
         <input
-          v-model="form.author"
+          v-model="form.place"
           type="text"
-          name="author"
+          name="place"
           class="mt-1 block w-full border-gray p-1"
         />
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <label for="title" class="block text-sm font-medium text-gray-700"
-          >Title</label
-        >
-        <input
-          v-model="form.title"
-          type="text"
-          name="title"
-          class="mt-1 block w-full border-gray p-1"
-        />
-      </div>
-    </div>
     <div class="row mt-4">
       <div class="col">
         <label for="first_name" class="block text-sm font-medium text-gray-700"
@@ -41,49 +28,20 @@
         ></datepicker>
       </div>
     </div>
+
     <div class="row mt-4">
       <div class="col">
-        <div
-          class="inline-block w-2 h-2 rounded-full mr-2"
-          :class="'bg-' + priorityColor + '-400'"
-        />
         <label
           for="priority"
           class="inline-block text-sm font-medium text-gray-700"
-          >Priority</label
+          >Horses</label
         >
-        <select
-          v-model="form.priority"
-          name="priority"
-          class="mt-1 block w-full border-gray p-1"
-        >
-          <option value="HIGH">High</option>
-          <option value="MEDIUM">Medium</option>
-          <option value="LOW">Low</option>
-        </select>
-      </div>
-      <div class="col">
-        <div
-          class="inline-block w-2 h-2 rounded-full mr-2"
-          :class="'bg-' + form.color.toLowerCase() + '-400'"
-        />
-        <label
-          for="color"
-          class="inline-block text-sm font-medium text-gray-700"
-          >Color</label
-        >
-
-        <select
-          v-model="form.color"
-          name="color"
-          class="mt-1 block w-full border-gray p-1"
-        >
-          <option value="GRAY">Gray</option>
-          <option value="BLUE">Blue</option>
-          <option value="INDIGO">Indigo</option>
-          <option value="PURPLE">Purple</option>
-          <option value="PINK">Pink</option>
-        </select>
+        <b-form-checkbox-group
+          id="checkbox-group-1"
+          v-model="selected"
+          :options="options"
+          name="horses"
+        ></b-form-checkbox-group>
       </div>
     </div>
     <div class="row mt-5">
@@ -109,8 +67,10 @@ export default {
         title: "",
         date: new Date(),
         priority: "MEDIUM",
-        color: "GRAY",
+        color: "#ffca00",
       },
+      selected: [],
+      options: [],
     };
   },
   components: {
@@ -121,21 +81,18 @@ export default {
       author: (state) => state.author,
       nameAlias: "author",
     }),
-
-    priorityColor() {
-      const mappings = {
-        HIGH: "red",
-        MEDIUM: "yellow",
-        LOW: "green",
-        default: "teal",
-      };
-      return mappings[this.form.priority] || mappings.default;
-    },
   },
 
   async created() {
-      this.form.author = this.$store.state.author;
-    },
+    const listOfHorses = await axios({
+        url: `/api/horses`,
+        method: 'GET',
+      });
+      for (let i = 0; i < listOfHorses.data.allHorses.length; i++) {
+      const horseName = listOfHorses.data.allHorses[i].name;
+      this.options.push(horseName);
+    }
+  },
 
   methods: {
     async addTodo() {
@@ -145,7 +102,7 @@ export default {
         method: "POST",
         data: this.form,
       });
-      this.$emit("task-added" );
+      this.$emit("task-added");
       this.form = {
         author: this.$store.state.author,
         title: "",

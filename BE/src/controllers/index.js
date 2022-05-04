@@ -4,4 +4,5 @@ module.exports = {
   addResult: require('./addResult.controller'),
   getTasks: require('./getTasks.controller'),
   authorsList: require('./authorsList.controller'),
+  getAllHorses: require('./getAllHorses.controller'),
 }

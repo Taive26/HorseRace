@@ -23,5 +23,5 @@ Vue.use(Datepicker)
 new Vue({
   render: h => h(App),
   router,
-  store
+  store,
 }).$mount('#app')
