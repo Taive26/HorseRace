@@ -7,7 +7,7 @@
           >Place</label
         >
         <input
-          v-model="form.place"
+          v-model="place"
           type="text"
           name="place"
           class="mt-1 block w-full border-gray p-1"
@@ -23,7 +23,7 @@
         <datepicker
           class="block text-sm font-medium text-gray-700 p-1"
           placeholder="Select Date"
-          v-model="form.date"
+          v-model="date"
           :format="'dd.MM.yyyy'"
         ></datepicker>
       </div>
@@ -36,18 +36,13 @@
           class="inline-block text-sm font-medium text-gray-700"
           >Horses</label
         >
-        <b-form-checkbox-group
-          id="checkbox-group-1"
-          v-model="selected"
-          :options="options"
-          name="horses"
-        ></b-form-checkbox-group>
+        <vselect multiple v-model="participants" :options="options"></vselect>
       </div>
     </div>
     <div class="row mt-5">
       <div class="col text-center">
-        <button class="bg-green-400 px-4 py-2 rounded" @click="addTodo">
-          Add todo
+        <button class="bg-green-400 px-4 py-2 rounded" @click="addRace">
+          Add race
         </button>
       </div>
     </div>
@@ -57,24 +52,21 @@
 import axios from "axios";
 import Datepicker from "vuejs-datepicker";
 import { mapState } from "vuex";
+import vselect from "vue-select";
 
 export default {
   data() {
     return {
       apiURL: process.env.VUE_APP_BACKEND_URL,
-      form: {
-        author: "",
-        title: "",
-        date: new Date(),
-        priority: "MEDIUM",
-        color: "#ffca00",
-      },
-      selected: [],
+      place: "",
+      date: new Date(),
+      participants: [],
       options: [],
     };
   },
   components: {
     Datepicker,
+    vselect,
   },
   computed: {
     ...mapState({
@@ -85,31 +77,31 @@ export default {
 
   async created() {
     const listOfHorses = await axios({
-        url: `/api/horses`,
-        method: 'GET',
-      });
-      for (let i = 0; i < listOfHorses.data.allHorses.length; i++) {
+      url: `/api/horses`,
+      method: "GET",
+    });
+    for (let i = 0; i < listOfHorses.data.allHorses.length; i++) {
       const horseName = listOfHorses.data.allHorses[i].name;
       this.options.push(horseName);
     }
   },
 
   methods: {
-    async addTodo() {
-      await axios({
-        url: `${this.apiURL}/api/createTask`,
-        //url: "api/createTask",
-        method: "POST",
-        data: this.form,
-      });
-      this.$emit("task-added");
-      this.form = {
-        author: this.$store.state.author,
-        title: "",
-        date: new Date(),
-        priority: "MEDIUM",
-        color: "GRAY",
+    async addRace() {
+      let newRace = {
+        place: this.place,
+        date: this.date,
+        participants: this.participants,
       };
+
+      console.log(newRace);
+
+      await axios({
+        url: `api/addRace`,
+        method: "POST",
+        data: newRace,
+      });
+      this.$router.push("/results");
     },
   },
 };

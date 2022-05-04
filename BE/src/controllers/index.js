@@ -5,4 +5,5 @@ module.exports = {
   getTasks: require('./getTasks.controller'),
   authorsList: require('./authorsList.controller'),
   getAllHorses: require('./getAllHorses.controller'),
+  getAllRaces: require('./getAllRaces.controller'),
 }

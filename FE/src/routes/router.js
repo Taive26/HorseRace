@@ -1,20 +1,22 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Tasks from './../views/getTasks'
+import enterRace from './../views/enterRace'
+import results from './../views/results'
 
 Vue.use(VueRouter);
 
 export const routes = [
- //* {
- //*   path: '/',
- //*   name: 'Your name',
- //*   components: { default: Name }
- //* },
   {
     path: '/',
-    name: 'Your tasks',
-    components: { default: Tasks }
+    name: 'Enter the race',
+    components: { default: enterRace }
   },
+  {
+    path: '/results',
+    name: 'Results',
+    components: { default: results }
+  },
+
   {
     path: '/*',
     component: 404
