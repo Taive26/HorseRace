@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
   place: { type: String, required: true, trim: true },
-  date: { type: Date, required: true },
+  date: { type: String, required: true },
   participants: [],
 });
 

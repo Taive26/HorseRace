@@ -1,1 +1,2 @@
 # HorseRace
+Horserace betting application.

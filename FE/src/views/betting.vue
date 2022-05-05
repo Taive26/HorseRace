@@ -1,9 +1,8 @@
 <template>
-  <div id="app">
     <div class="flex justify-center">
       <div class="min-h-screen flex overflow-x-scroll py-12">
         <div
-          class="bg-gray-100 rounded-lg px-3 py-3 column-double-width rounded mr-4"
+          class="bg-gray-100 rounded-lg px-100 py-3 column-double-width rounded mr-4"
         >
           <div class="row">
             <img
@@ -11,47 +10,29 @@
               alt=""
             />
           </div>
-          <add-horse class="my-3" />
-          <new-race class="my-3" />
-
-          <div class="row mt-5">
-            <div class="col text-center">
-              <button
-                class="bg-green-400 px-4 py-2 rounded"
-                @click="viewRaces"
-              >
-                BETTING & RESULTS
-              </button>
-            </div>
-          </div>
+          <betting class="my-3" />
         </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import NewRace from "../components/NewRace";
-import AddHorse from "../components/AddHorse";
+import Betting from "../components/Betting";
 
 export default {
   name: "App",
   components: {
-    NewRace,
-    AddHorse,
+    Betting
   },
 
   data() {
     return {
-      apiURL: process.env.VUE_APP_BACKEND_URL,
-      races: [],
+
     };
   },
 
   methods: {
-    viewRaces() {
-      this.$router.push("/races");
-    },
+
   },
 };
 </script>

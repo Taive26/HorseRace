@@ -1,11 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
-const {  getTasks, addRace, addHorse, addResult, authorsList, getAllHorses, getAllRaces } = require('./controllers')
+const {  addRace, addHorse, addResult, getAllHorses, getAllRaces } = require('./controllers')
 
 
-router.get('/tasks', getTasks)
-router.get('/authorsList', authorsList)
 router.get('/horses', getAllHorses)
 router.get('/races', getAllRaces)
 router.post('/addRace', addRace)

@@ -15,17 +15,17 @@
       </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="row">
       <div class="col">
-        <label for="first_name" class="block text-sm font-medium text-gray-700"
-          >Date</label
+        <label for="author" class="block text-sm font-medium text-gray-700"
+          >When:</label
         >
-        <datepicker
-          class="block text-sm font-medium text-gray-700 p-1"
-          placeholder="Select Date"
+        <input
           v-model="date"
-          :format="'dd.MM.yyyy'"
-        ></datepicker>
+          type="text"
+          name="place"
+          class="mt-1 block w-full border-gray p-1"
+        />
       </div>
     </div>
 
@@ -50,8 +50,6 @@
 </template>
 <script>
 import axios from "axios";
-import Datepicker from "vuejs-datepicker";
-import { mapState } from "vuex";
 import vselect from "vue-select";
 
 export default {
@@ -59,20 +57,13 @@ export default {
     return {
       apiURL: process.env.VUE_APP_BACKEND_URL,
       place: "",
-      date: new Date(),
+      date: "",
       participants: [],
       options: [],
     };
   },
   components: {
-    Datepicker,
     vselect,
-  },
-  computed: {
-    ...mapState({
-      author: (state) => state.author,
-      nameAlias: "author",
-    }),
   },
 
   async created() {
@@ -94,14 +85,13 @@ export default {
         participants: this.participants,
       };
 
-      console.log(newRace);
 
       await axios({
         url: `api/addRace`,
         method: "POST",
         data: newRace,
       });
-      this.$router.push("/results");
+      this.$router.push("/races");
     },
   },
 };

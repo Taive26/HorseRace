@@ -10,24 +10,24 @@
               alt=""
             />
           </div>
-          <result-table class="my-3" />
+          <race-table class="my-3" />
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import ResultTable from "../components/ResultTable";
+import RaceTable from "../components/RaceTable";
 import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    ResultTable
+    RaceTable
   },
 
   data() {
-    ResultTable
+    RaceTable
     return {
       apiURL: process.env.VUE_APP_BACKEND_URL,
     races: [],
@@ -43,7 +43,6 @@ export default {
         url: `api/races`,
         method: "GET",
       });
-      console.log(races);
       this.items = races.data.allRaces;
     },
 

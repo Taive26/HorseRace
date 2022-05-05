@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import enterRace from './../views/enterRace'
-import results from './../views/results'
+import races from './../views/races'
+import betting from './../views/betting'
 
 Vue.use(VueRouter);
 
@@ -12,9 +13,14 @@ export const routes = [
     components: { default: enterRace }
   },
   {
-    path: '/results',
-    name: 'Results',
-    components: { default: results }
+    path: '/races',
+    name: 'Races',
+    components: { default: races }
+  },
+  {
+    path: '/betting',
+    name: 'Betting',
+    components: { default: betting }
   },
 
   {
