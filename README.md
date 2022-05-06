@@ -14,3 +14,11 @@ MONGODB_URI=mongodb+srv://:@cluster0.g29ki.mongodb.net/?retryWrites=true&w=major
 
 Step 4 Run application
 npm run start:dev
+
+
+# FE
+Step 1: Install
+npm install
+
+Step 4 Run application
+npm run serve
